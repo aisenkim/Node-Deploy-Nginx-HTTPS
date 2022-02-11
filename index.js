@@ -1,19 +1,56 @@
 const express = require("express");
 const cors = require("cors");
+//const bodyParser = require('body-parser');
 const app = express();
 const port = 3000;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
+//app.use(bodyParser.text())
 app.use(express.json());
 
 app.get("/", (req, res) => {
+  //res.set("X-CSE356", "61f9c246ca96e9505dd3f812");
   res.send("Hello World");
 });
 
-app.post("/", (req, res) => {
+app.post("/ttt/", (req, res) => {
   const date = new Date();
-  res.send(`Hello ${req.body.name}, ${date}`);
+  //res.set("X-CSE356", "61f9c246ca96e9505dd3f812");
+  const html = `
+<html lang="en">
+<head>
+ <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <div class="box">
+      <div>
+        <h1>Hello ${req.body.name}, ${date}</h1>
+        <h1 id="title">Welcome to Tic-Tac-Toe</h1>
+        <form action="/ttt/" method="post">
+          <label for="name" class="label-name">Name:</label>
+          <input type="text" id="name" name="name" />
+          <input type="submit" value="Submit" class="button" />
+        </form>
+      </div>
+    </div>
+    <div class="game-board" id="board">
+      <div class="game-block" id="0"></div>
+      <div class="game-block" id="1"></div>
+      <div class="game-block" id="2"></div>
+      <div class="game-block" id="3"></div>
+      <div class="game-block" id="4"></div>
+      <div class="game-block" id="5"></div>
+      <div class="game-block" id="6"></div>
+      <div class="game-block" id="7"></div>
+      <div class="game-block" id="8"></div>
+    </div>
+    <script src="index.js"></script>
+  </body>
+</html>
+	`;
+  res.send(html);
+  //res.send(`Hello ${req.body.name}, ${date}`);
 });
 
 app.post("/ttt/play", (req, res) => {
