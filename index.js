@@ -18,6 +18,7 @@ app.post("/", (req, res) => {
 
 app.post("/ttt/play", (req, res) => {
   //res.send("Sent from the server /ttt/play");
+  res.set("X-CSE356", "61f9c246ca96e9505dd3f812");
   let board = req.body;
   let winner = " ";
   //   let altered = 0;
